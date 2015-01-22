@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ImagePicker</title>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #canvas {
+            border: 5px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <img src="" id="output">
+    <p id="info"></p>
+    <script type="text/javascript" src="imagePicker.js"></script>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var output = document.getElementById('output');
+        var info = document.getElementById('info');
+        var context = canvas.getContext('2d');
+        var imagePicker = new ImagePicker(canvas);
+        imagePicker.init('http://lingyucoder-demo.qiniudn.com/imgsliders_1.jpg');
+        imagePicker.onselect = function(data) {
+            output.src = data.data;
+            info.textContent = '宽度：' + data.width + '，高度：' + data.height;
+        };
+    </script>
+</body>
+</html>
