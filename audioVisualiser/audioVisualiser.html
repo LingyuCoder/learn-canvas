@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ImagePicker</title>
+    <style type="text/css">
+        html, body {
+          margin:0;
+          padding:0;
+          background-color:#000;
+        }
+
+        canvas {
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          pointer-events: none;
+        }
+
+        audio {
+          position: absolute;
+          bottom: 1em; left: 50%;
+          width: 500px; margin: 0 -250px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <audio id="audio" controls autoplay loop src="http://lingyucoder-demo.qiniudn.com/audio/1.OGG"></audio>
+    <script type="text/javascript" src="../util.js"></script>
+    <script type="text/javascript" src="AudioAnalyser.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function() {
+            var $ = document.querySelector.bind(document);
+            var canvas = $('#canvas');
+            var audio = $('#audio');
+            var analyser = new AudioAnalyser(null, 2048, 0.5).audio(audio);
+            Util.loop(function(f, t, dt) {
+                analyser.update();
+
+                var amp = analyser._audio.duration ? Math.min(1, Math.pow(1.25 * analyser.amplitude(15e3), 2)) : 0.5 - 0.25 * Math.cos(t / 1000);
+
+            });
+        });
+    </script>
+</body>
+</html>
