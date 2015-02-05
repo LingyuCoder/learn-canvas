@@ -1,4 +1,10 @@
-var Vector2 = (function() {
+(function(root, name, factory) {
+    if (typeof module !== 'undefined' && module.exports) module.exports = factory();
+    else if (typeof define === 'function' && define.amd) define(factory);
+    else root[name] = root[name] || factory();
+})(this, 'Vector2', function() {
+    'use strict';
+
     function Vector2(x, y) {
         if (!this instanceof Vector2) return new Vector2(x, y);
         if (x instanceof Vector2) {
@@ -10,65 +16,65 @@ var Vector2 = (function() {
         this.y = y || 0;
     }
 
-    var proto = Vector2.prototype;
+    Util.extend(Vector2.prototype, {
+        add: function(vector) {
+            this.x += vector.x;
+            this.y += vector.y;
+        },
 
-    proto.add = function(vector) {
-        this.x += vector.x;
-        this.y += vector.y;
-    }
+        magnitude: function() {
+            return Math.sqrt(this.squaredMagnitude());
+        },
 
-    proto.magnitude = function() {
-        return Math.sqrt(this.squaredMagnitude());
-    }
+        scale: function(scale) {
+            this.x *= scale;
+            this.y *= scale;
+        },
 
-    proto.scale = function(scale) {
-        this.x *= scale;
-        this.y *= scale;
-    }
+        sub: function(vector) {
+            this.x -= vector.x;
+            this.y -= vector.y;
+            return this;
+        },
 
-    proto.sub = function(vector) {
-        this.x -= vector.x;
-        this.y -= vector.y;
-        return this;
-    }
+        negate: function() {
+            this.x = -this.x;
+            this.y = -this.y;
+            return this;
+        },
 
-    proto.negate = function() {
-        this.x = -this.x;
-        this.y = -this.y;
-        return this;
-    }
+        squaredMagnitude: function() {
+            return this.x * this.x + this.y * this.y;
+        },
 
-    proto.squaredMagnitude = function() {
-        return this.x * this.x + this.y * this.y;
-    }
+        normalize: function() {
+            var magnitude = this.magnitude();
+            if (magnitude) {
+                this.x /= magnitude;
+                this.y /= magnitude;
+            }
+            return this;
+        },
 
-    proto.normalize = function() {
-        var magnitude = this.magnitude();
-        if (magnitude) {
-            this.x /= magnitude;
-            this.y /= magnitude;
+        rotate: function(angle) {
+            var x = this.x;
+            var y = this.y;
+            var cos = Math.cos(angle);
+            var sin = Math.sin(angle);
+
+            this.x = x * cos - y * sin;
+            this.y = x * sin + y * cos;
+            return this;
+        },
+
+        dot: function(vector) {
+            return this.x * vector.x + this.y * vector.y;
+        },
+
+        toString: function() {
+            return '(' + this.x.toFixed(3) + ',' + this.y.toFixed(3) + ')';
         }
-        return this;
-    }
-
-    proto.rotate = function(angle) {
-        var x = this.x;
-        var y = this.y;
-        var cos = Math.cos(angle);
-        var sin = Math.sin(angle);
-
-        this.x = x * cos - y * sin;
-        this.y = x * sin + y * cos;
-        return this;
-    }
-
-    proto.dot = function(vector) {
-        return this.x * vector.x + this.y * vector.y;
-    }
-
-    proto.toString = function() {
-        return '(' + this.x.toFixed(3) + ',' + this.y.toFixed(3) + ')';
-    }
+    });
 
     return Vector2;
-}(this));
+});

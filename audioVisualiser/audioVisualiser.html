@@ -7,7 +7,6 @@
         html, body {
           margin:0;
           padding:0;
-          background-color:#000;
         }
 
         canvas {
@@ -27,21 +26,10 @@
 <body>
     <canvas id="canvas"></canvas>
     <audio id="audio" controls autoplay loop src="http://lingyucoder-demo.qiniudn.com/audio/1.OGG"></audio>
+    <script type="text/javascript" src="../RequestAnimationFramePolyfill.js"></script>
     <script type="text/javascript" src="../util.js"></script>
+    <script type="text/javascript" src="../Color.js"></script>
     <script type="text/javascript" src="AudioAnalyser.js"></script>
-    <script type="text/javascript">
-        window.addEventListener('load', function() {
-            var $ = document.querySelector.bind(document);
-            var canvas = $('#canvas');
-            var audio = $('#audio');
-            var analyser = new AudioAnalyser(null, 2048, 0.5).audio(audio);
-            Util.loop(function(f, t, dt) {
-                analyser.update();
-
-                var amp = analyser._audio.duration ? Math.min(1, Math.pow(1.25 * analyser.amplitude(15e3), 2)) : 0.5 - 0.25 * Math.cos(t / 1000);
-
-            });
-        });
-    </script>
+    <script type="text/javascript" src="AudioVisualiser.js"></script>
 </body>
 </html>
