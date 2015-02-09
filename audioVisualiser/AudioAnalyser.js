@@ -5,13 +5,14 @@
 })(this, 'AudioAnalyser', function() {
     'use strict';
 
-    function Analyser(context, fft, smoothing) {
+    function Analyser(context, fft, smoothing, processors) {
         if (!this instanceof(Analyser)) return new Analyser(context, fft, smoothing);
         var AudioContext = window.AudioContext || window.webkitAudioContext;
         this.context = context || new AudioContext();
         this.analyser = this.context.createAnalyser();
         this.analyser.fftSize = fft || 2048;
         this.analyser.smoothingTimeConstant = smoothing || 0;
+        this.processors = processors || [];
         this.analyser.connect(this.context.destination);
         this.wave = new Uint8Array(this.analyser.frequencyBinCount * 2);
         this.freq = new Uint8Array(this.analyser.frequencyBinCount);

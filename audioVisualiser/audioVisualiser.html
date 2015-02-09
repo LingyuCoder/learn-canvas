@@ -1,35 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>ImagePicker</title>
+    <title>音频可视化Demo</title>
     <style type="text/css">
-        html, body {
-          margin:0;
-          padding:0;
-        }
-
-        canvas {
-          position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          pointer-events: none;
-        }
-
-        audio {
-          position: absolute;
-          bottom: 1em; left: 50%;
-          width: 500px; margin: 0 -250px;
-        }
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+    audio {
+        position: absolute;
+        bottom: 1em;
+        left: 50%;
+        width: 500px;
+        margin: 0 -250px;
+    }
+    select {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
     </style>
 </head>
+
 <body>
+    
     <canvas id="canvas"></canvas>
-    <audio id="audio" controls autoplay loop src="http://lingyucoder-demo.qiniudn.com/audio/1.OGG"></audio>
+    <audio id="audio" controls autoplay loop src="http://lingyucoder-demo.qiniudn.com/audio/4.OGG"></audio>
+    <select id="showType">
+      <option value="line" selected>线条</option>
+      <option value="bar">柱状</option>
+      <option value="spread">发散</option>
+      <option value="snow">雪花</option>
+    </select>
     <script type="text/javascript" src="../RequestAnimationFramePolyfill.js"></script>
-    <script type="text/javascript" src="../util.js"></script>
+    <script type="text/javascript" src="../Util.js"></script>
     <script type="text/javascript" src="../Color.js"></script>
+    <script type="text/javascript" src="../Item.js"></script>
+    <script type="text/javascript" src="../Painter.js"></script>
+    <script type="text/javascript" src="../Behavior.js"></script>
     <script type="text/javascript" src="AudioAnalyser.js"></script>
+    <script type="text/javascript" src="AudioPainter.js"></script>
+    <script type="text/javascript" src="LinePainter.js"></script>
+    <script type="text/javascript" src="BarPainter.js"></script>
+    <script type="text/javascript" src="SnowPainter.js"></script>
+    <script type="text/javascript" src="AudioBehavior.js"></script>
     <script type="text/javascript" src="AudioVisualiser.js"></script>
 </body>
+
 </html>
