@@ -85,6 +85,15 @@
         return loop();
     }
 
+    function currying() {
+        var f = arguments[0];
+        var args = Array.prototype.slice.call(arguments, 1);
+        return function() {
+            args.push.apply(args, arguments);
+            return f.apply(this, args);
+        }
+    }
+
     return {
         hasOwn: hasOwn,
         isType: isType,
@@ -115,6 +124,7 @@
             for (c = [], i = 0, l = a[1].length; i < l;)
                 c[i] = a[1][i] + (b[1][i] - a[1][i++]) * t;
             return c;
-        }
+        },
+        currying: currying
     };
 });

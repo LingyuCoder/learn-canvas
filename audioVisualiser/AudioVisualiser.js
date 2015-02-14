@@ -28,7 +28,7 @@ window.addEventListener('load', function() {
     var painters = {
         'line': new LinePainter(options),
         'bar': new BarPainter(options),
-        'spread': new AudioPainter(options),
+        'spread': new SpreadPainter(options),
         'snow': new SnowPainter()
     };
 

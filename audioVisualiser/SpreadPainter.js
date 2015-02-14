@@ -2,15 +2,15 @@
     if (typeof module !== 'undefined' && module.exports) module.exports = factory();
     else if (typeof define === 'function' && define.amd) define(factory);
     else root[name] = root[name] || factory();
-})(this, 'AudioPainter', function() {
+})(this, 'SpreadPainter', function() {
     'use strict';
 
-    function AudioPainter(options) {
-        if (!this instanceof(AudioPainter)) return new AudioPainter(options);
+    function SpreadPainter(options) {
+        if (!this instanceof(SpreadPainter)) return new SpreadPainter(options);
         this.options = options;
     }
 
-    Util.extend(AudioPainter.prototype, {
+    Util.extend(SpreadPainter.prototype, {
         paint: function(item, ctx) {
             var canvas = ctx.canvas;
             var state = item.state;
@@ -46,5 +46,5 @@
             ctx.closePath();
         }
     });
-    return AudioPainter;
+    return SpreadPainter;
 });
