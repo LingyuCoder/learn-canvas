@@ -29,7 +29,4 @@
                 ctx.drawImage(imgs[i], 440 * i + 440, 0);
             }
         });
-
-
-
 }(this));

@@ -15,7 +15,7 @@
     };
 
     function Item(name, options, painter, behaviors) {
-        if (!this instanceof Item) return new Item(name, painter, behaviors);
+        if (!this instanceof Item) return new Item(name, options, painter, behaviors);
         if (items[name]) throw new Error('Create Item Error: Name must be unique!');
 
         this.name = name;
@@ -29,6 +29,7 @@
         this.left = options.left;
         this.width = options.width;
         this.height = options.height;
+        this.frameCount = 0;
 
         items[name] = this;
     }
@@ -43,7 +44,7 @@
         update: function(ctx, time) {
             var behaviors = this.behaviors;
             for (var i = 0; i < behaviors.length; i++) {
-                behaviors[i].execute(this, ctx, time);
+                behaviors[i].execute(this, ctx, ++this.frameCount, time);
             }
             return this;
         }

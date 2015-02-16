@@ -12,7 +12,7 @@
     }
 
     Util.extend(AudioBehavior.prototype, {
-        execute: function(item, ctx, time) {
+        execute: function(item, ctx, frame, time) {
             var analyser = this.analyser;
             var state = item.state = item.state || {};
 

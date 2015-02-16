@@ -10,3 +10,4 @@
 
 [音频可视化](http://lingyucoder.github.io/learn-canvas/audioVisualiser/audioVisualiser.html)：扩散效果来自[codepen:HhnpA](http://codepen.io/thepheer/pen/HhnpA)，雪花效果来自[codepen:qvjkn](http://codepen.io/loktar00/pen/qvjkn)，重写了代码
 
+[雪碧人物](http://lingyucoder.github.io/learn-canvas/sprites/sprites.html) 上下左右移动，空格攻击
