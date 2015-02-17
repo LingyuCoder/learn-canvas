@@ -14,6 +14,24 @@
     }
 
     Util.extend(Loader.prototype, {
+        loadJson: function(url) {
+            return this._loadResource(url, 'json', function(resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'json';
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            resolve(xhr.response);
+                        } else {
+                            reject(status);
+                        }
+                    }
+                };
+                xhr.onerror = reject;
+                xhr.send();
+            });
+        },
         loadImage: function(url) {
             return this._loadResource(url, 'image', function(resolve, reject) {
                 var img = new Image();
@@ -37,6 +55,9 @@
         },
         loadSounds: function(urls) {
             return this._loadResources(urls, 'sound');
+        },
+        loadJsons: function(urls) {
+            return this._loadResources(urls, 'json');
         },
         _loadResource: function(url, type, handler) {
             if (!isString(url)) {

@@ -12,35 +12,35 @@ window.addEventListener('load', function() {
 
     loader.loadImages(['mv.png', 'atk.png']).then(function(images) {
         var start = 0;
-        var sprite = new SpriteItem('sprite', {
+        var options = {
             width: 64,
             height: 64,
             left: 100,
             top: 100,
             animations: {
                 'down': {
-                    frames: [0, 1, 2, 3],
+                    frames: [1, 3],
                     image: images[0],
                     frameDuration: 15,
                     width: 48,
                     height: 64
                 },
                 'left': {
-                    frames: [4, 5, 6, 7],
+                    frames: [5, 7],
                     image: images[0],
                     frameDuration: 15,
                     width: 48,
                     height: 64
                 },
                 'right': {
-                    frames: [8, 9, 10, 11],
+                    frames: [9, 11],
                     image: images[0],
                     frameDuration: 15,
                     width: 48,
                     height: 64
                 },
                 'up': {
-                    frames: [12, 13, 14, 15],
+                    frames: [13, 15],
                     image: images[0],
                     frameDuration: 15,
                     width: 48,
@@ -79,18 +79,19 @@ window.addEventListener('load', function() {
             startFrame: 0,
             startAnime: 'down',
             image: images[0]
-        }, [new PlayerBehavior()]);
+        };
+        var sprite = new SpriteItem(
+            'sprite',
+            options,
+            new SpritePainter(options), [new SpriteBehavior(options), new PlayerBehavior()]);
 
         Util.loop(function(f, t, dt) {
-            try {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                sprite.update(ctx, +new Date).paint(ctx);
-            } catch (e) {
-                console.log(e.message);
-                console.log(e.stack);
-                debugger
-            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            sprite.update(ctx, +new Date).paint(ctx);
         });
+    }).catch(function(e) {
+        console.error(e.message);
+        console.error(e.stack);
     });
 
 }, false);

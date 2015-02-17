@@ -5,10 +5,10 @@
 })(this, 'SpriteItem', function() {
     'use strict';
 
-    function SpriteItem(name, options, behaviors) {
+    function SpriteItem(name, options, painter, behaviors) {
         if (!this instanceof SpriteItem) return SpriteItem(name, options, behaviors);
 
-        Item.call(this, name, options, new SpritePainter(options), [new SpriteBehavior(options)].concat(behaviors || []));
+        Item.call(this, name, options, painter, behaviors);
 
         this.currentFrame = options.startFrame || 0;
         this.currentAnime = options.startAnime || 0;
