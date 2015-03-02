@@ -82,12 +82,11 @@ window.addEventListener('load', function() {
         };
         var sprite = new SpriteItem(
             'sprite',
-            options,
-            new SpritePainter(options), [new SpriteBehavior(options), new PlayerBehavior()]);
+            options, [new PlayerBehavior()]);
 
         Util.loop(function(f, t, dt) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            sprite.update(ctx, +new Date).paint(ctx);
+            sprite.update(ctx).paint(ctx);
         });
     }).catch(function(e) {
         console.error(e.message);

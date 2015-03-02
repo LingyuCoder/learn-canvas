@@ -21,15 +21,10 @@
         this.name = name;
         this.painter = painter;
         this.behaviors = behaviors || [];
-
-        options = Util.extend({}, defaultOptions, options);
-
-        this.visible = options.visible;
-        this.top = options.top;
-        this.left = options.left;
-        this.width = options.width;
-        this.height = options.height;
+        this.scene = null;
         this.frameCount = 0;
+
+        Util.extend(this, defaultOptions, options);
 
         items[name] = this;
     }
@@ -41,10 +36,10 @@
             }
             return this;
         },
-        update: function(ctx, time) {
+        update: function(ctx) {
             var behaviors = this.behaviors;
             for (var i = 0; i < behaviors.length; i++) {
-                behaviors[i].execute(this, ctx, ++this.frameCount, time);
+                behaviors[i].execute(this, ctx, ++this.frameCount);
             }
             return this;
         }

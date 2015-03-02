@@ -5,10 +5,35 @@
 })(this, 'SpriteItem', function() {
     'use strict';
 
-    function SpriteItem(name, options, painter, behaviors) {
+    var SpritePainter = {
+        paint: function(sprite, ctx) {
+            var animation = sprite.animations[sprite.currentAnime];
+            var image = animation.image;
+            var fWidth = animation.width || sprite.width;
+            var fHeight = animation.height || sprite.height;
+            var col = image.width / fWidth;
+            var index = animation.frames[sprite.currentFrame];
+            ctx.drawImage(image, (index % col) * fWidth, Math.floor(index / col) * fHeight, fWidth, fHeight, sprite.left, sprite.top, fWidth, fHeight);
+        }
+    };
+
+    var SpriteBehavior = {
+        execute: function(sprite, ctx, frame) {
+            var animation = sprite.animations[sprite.currentAnime];
+            var frameDuration = animation.frameDuration;
+            if ((frame + 1) % frameDuration === 0) {
+                if (sprite.isRunning) {
+                    sprite.currentFrame = (sprite.currentFrame + 1) % sprite.animations[sprite.currentAnime].frames.length;
+                    sprite.isRunning = !(sprite.currentFrame === 0 && !sprite.isLoop);
+                }
+            }
+        }
+    };
+
+    function SpriteItem(name, options, behaviors) {
         if (!this instanceof SpriteItem) return SpriteItem(name, options, behaviors);
 
-        Item.call(this, name, options, painter, behaviors);
+        Item.call(this, name, options, SpritePainter, [SpriteBehavior].concat(behaviors || []));
 
         this.currentFrame = options.startFrame || 0;
         this.currentAnime = options.startAnime || 0;

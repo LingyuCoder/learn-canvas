@@ -31,7 +31,7 @@
     }
 
     Util.extend(PlayerBehavior.prototype, {
-        execute: function(item, ctx, frame, time) {
+        execute: function(item, ctx, frame) {
             var action = keyCode2Action[pressingKey];
             var isAtking = /atk/.test(item.currentAnime);
             if (isAtking && !item.isRunning) {

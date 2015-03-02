@@ -5,6 +5,12 @@
 })(this, 'TileMap', function() {
     'use strict';
 
+    var TileMapPainter = {
+        paint: function(item, ctx) {
+            ctx.drawImage(item.canvas, item.left, item.top);
+        }
+    };
+
     function createCanvas() {
         var image = this.image;
         var map = this.map;
@@ -26,15 +32,15 @@
         return canvas;
     }
 
-    function TileMap(name, options) {
-        if (!this instanceof TileMap) return TileMap(name, options);
+    function TileMap(name, options, behaviors) {
+        if (!this instanceof TileMap) return TileMap(name, options, behaviors);
 
         options = Util.extend({}, options, {
             width: options.cellWidth * options.map[0].length,
             height: options.cellHeight * options.map.length
         });
 
-        Item.call(this, name, options, new TileMapPainter());
+        Item.call(this, name, options, TileMapPainter, behaviors);
 
         this.name = name;
         this.image = options.image;
