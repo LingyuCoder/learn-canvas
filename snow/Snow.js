@@ -1,8 +1,4 @@
-(function(root, name, factory) {
-    if (typeof module !== 'undefined' && module.exports) module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define(factory);
-    else root[name] = root[name] || factory();
-})(this, 'Snow', function() {
+define(['Vector2', 'Util'], function(Vector2, Util) {
     'use strict';
 
     function microtime() {
@@ -31,8 +27,6 @@
             this.rotation += this.rspeed * delta_time;
         }
     });
-
-
 
     function Snow(canvas_id, options) {
         this.canvas = document.getElementById(canvas_id);

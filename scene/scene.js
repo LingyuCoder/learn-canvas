@@ -1,12 +1,5 @@
-window.addEventListener('load', function() {
+require(['Scene', 'Item', 'Stage'], function(Scene, Item, Stage) {
     'use strict';
-
-    var $ = document.querySelector.bind(document);
-    var canvas = $('#canvas');
-    var ctx = canvas.getContext("2d");
-
-    ctx.font = '30px Arial';
-
     var scene = new Scene('clock', {
         width: canvas.width,
         height: canvas.height,
@@ -108,9 +101,15 @@ window.addEventListener('load', function() {
 
     scene.add([circle, numerals, ticks, center, hands]);
 
-    Util.loop(function(f, t, dt) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        scene.update(ctx).paint(ctx);
-    });
+    var stage = new Stage('#canvas');
 
-}, false);
+    stage.ctx.font = '30px Arial';
+    stage.rootScene.add(scene);
+
+    stage.tick(function() {
+        var ctx = this.ctx;
+        var canvas = this.canvas;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.update().paint();
+    }, 1000);
+});

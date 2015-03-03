@@ -1,8 +1,4 @@
-(function(root, name, factory) {
-    if (typeof module !== 'undefined' && module.exports) module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define(factory);
-    else root[name] = root[name] || factory();
-})(this, 'Vector2', function() {
+define(['Util'], function(Util) {
     'use strict';
 
     function Vector2(x, y) {

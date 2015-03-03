@@ -18,13 +18,14 @@
 </head>
 <body>
     <canvas id="canvas"></canvas>
-    <script type="text/javascript" src="../RequestAnimationFramePolyfill.js"></script>
-    <script type="text/javascript" src="../Util.js"></script>
-    <script type="text/javascript" src="../Promise.js"></script>
-    <script type="text/javascript" src="../Sound.js"></script>
-    <script type="text/javascript" src="../Loader.js"></script>
-    <script type="text/javascript" src="../Item.js"></script>
-    <script type="text/javascript" src="../TileMap.js"></script>
+    <script type="text/javascript" src="../lib/RequestAnimationFramePolyfill.js"></script>
+    <script type="text/javascript" src="../lib/promise.js"></script>
+    <script type="text/javascript" src="../lib/require.js"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: "../"
+      });
+    </script>
     <script type="text/javascript" src="tilemap.js"></script>
 </body>
 </html>

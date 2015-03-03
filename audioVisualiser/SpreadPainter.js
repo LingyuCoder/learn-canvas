@@ -1,8 +1,4 @@
-(function(root, name, factory) {
-    if (typeof module !== 'undefined' && module.exports) module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define(factory);
-    else root[name] = root[name] || factory();
-})(this, 'SpreadPainter', function() {
+define(['Util', 'Color'], function(Util, Color) {
     'use strict';
 
     function SpreadPainter(options) {

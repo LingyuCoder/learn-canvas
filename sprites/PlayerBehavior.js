@@ -1,8 +1,4 @@
-(function(root, name, factory) {
-    if (typeof module !== 'undefined' && module.exports) module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define(factory);
-    else root[name] = root[name] || factory();
-})(this, 'PlayerBehavior', function() {
+define(['Util'], function(Util) {
     'use strict';
 
     var keyCode2Action = {
@@ -12,18 +8,6 @@
         40: 'down',
         32: 'atk'
     };
-    var pressingKey = null;
-
-    var keydownCb = function(event) {
-        pressingKey = event.key || event.keyCode || event.which;
-    };
-
-    var keyupCb = function(event) {
-        pressingKey = null;
-    };
-
-    window.onkeydown = keydownCb;
-    window.onkeyup = keyupCb;
 
     function PlayerBehavior() {
         if (!this instanceof PlayerBehavior) return new PlayerBehavior();
@@ -32,22 +16,23 @@
 
     Util.extend(PlayerBehavior.prototype, {
         execute: function(item, ctx, frame) {
+            var pressingKey = item.pressingKey;
             var action = keyCode2Action[pressingKey];
             var isAtking = /atk/.test(item.currentAnime);
-            if (isAtking && !item.isRunning) {
+            if (isAtking && item.pause) {
                 item.currentAnime = this.lastAnime;
-                item.isRunning = !!pressingKey;
+                item.pause = !pressingKey;
             } else if (!isAtking && action === 'atk') {
                 this.lastAnime = item.currentAnime;
                 item.currentAnime += 'atk';
-                item.isLoop = false;
-                item.isRunning = true;
+                item.loop = false;
+                item.pause = false;
                 item.currentFrame = 0;
                 item.width = item.height = 64;
                 return;
             } else if (!isAtking) {
                 this.move(item, action);
-                item.isRunning = !!pressingKey;
+                item.pause = !pressingKey;
             }
         },
         move: function(item, action) {

@@ -1,15 +1,11 @@
-(function(root, name, factory) {
-    if (typeof module !== 'undefined' && module.exports) module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define(factory);
-    else root[name] = root[name] || factory();
-})(this, 'Sound', function() {
+define(['Util'], function(Util) {
     'use strict';
 
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     var context = new AudioContext();
 
     function Sound(url) {
-        if (!this instanceof(Sound)) return new Sound(url, buffer);
+        if (!this instanceof(Sound)) return new Sound(url);
         this.url = url;
         this.buffer = null;
     }

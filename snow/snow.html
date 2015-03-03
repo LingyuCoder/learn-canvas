@@ -18,28 +18,38 @@
 </head>
 <body>
     <canvas id="particle_canvas"></canvas>
-    <script type="text/javascript" src="../Util.js"></script>
-    <script type="text/javascript" src="../Vector2.js"></script>
-    <script type="text/javascript" src="Snow.js"></script>
+    <script type="text/javascript" src="../lib/RequestAnimationFramePolyfill.js"></script>
+    <script type="text/javascript" src="../lib/promise.js"></script>
+    <script type="text/javascript" src="../lib/require.js"></script>
+
     <script type="text/javascript">
-        var snow = new Snow('particle_canvas', {
-            'amount': 200,
-            'size': [8, 20],
-            'rotation': [1, 5],
-            'speed': [40, 80],
-            'swing': [0.1, 1],
-            'amplitude': [30, 50],
-            'alpha': [0.1, 0.95],
-            'images': ["1.png", "2.png", "3.png", "4.png"]
+        require.config({
+            baseUrl: "../",
+            paths: {
+                Snow: 'snow/Snow'
+            }
         });
+    </script>
+    <script type="text/javascript">
+        require(['Snow'], function(Snow){
+            var snow = new Snow('particle_canvas', {
+                'amount': 200,
+                'size': [8, 20],
+                'rotation': [1, 5],
+                'speed': [40, 80],
+                'swing': [0.1, 1],
+                'amplitude': [30, 50],
+                'alpha': [0.1, 0.95],
+                'images': ["1.png", "2.png", "3.png", "4.png"]
+            });
 
-        window.addEventListener('resize', function() {
-            snow.resize(window.innerWidth, window.innerHeight);
-        }, false);
+            window.addEventListener('resize', function() {
+                snow.resize(window.innerWidth, window.innerHeight);
+            }, false);
 
-        window.addEventListener('load', function() {
             snow.start();
-        }, false);
+        });
+        
     </script>
 </body>
 </html>

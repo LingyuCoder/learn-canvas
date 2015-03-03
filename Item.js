@@ -1,11 +1,6 @@
-(function(root, name, factory) {
-    if (typeof module !== 'undefined' && module.exports) module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define(factory);
-    else root[name] = root[name] || factory();
-})(this, 'Item', function() {
+define(['Util'], function(Util) {
     'use strict';
 
-    var items = {};
     var defaultOptions = {
         visible: true,
         top: 0,
@@ -16,7 +11,6 @@
 
     function Item(name, options, painter, behaviors) {
         if (!this instanceof Item) return new Item(name, options, painter, behaviors);
-        if (items[name]) throw new Error('Create Item Error: Name must be unique!');
 
         this.name = name;
         this.painter = painter;
@@ -25,8 +19,6 @@
         this.frameCount = 0;
 
         Util.extend(this, defaultOptions, options);
-
-        items[name] = this;
     }
 
     Util.extend(Item.prototype, {
@@ -45,11 +37,6 @@
         }
     });
 
-    Util.extend(Item, {
-        get: function(name) {
-            return items[name];
-        }
-    });
-
     return Item;
 });
+

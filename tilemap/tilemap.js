@@ -1,14 +1,11 @@
-window.addEventListener('load', function() {
+require(['Loader', 'TileMap', 'Stage'], function(Loader, TileMap, Stage) {
     'use strict';
 
     var loader = new Loader();
-    var $ = document.querySelector.bind(document);
+    var stage = new Stage('#canvas');
 
-    var canvas = $('#canvas');
-    var ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    stage.canvas.width = window.innerWidth;
+    stage.canvas.height = window.innerHeight;
 
     loader.loadImage('tiles.png').then(function(image) {
         var blueHouse = new TileMap('BlueHouse', {
@@ -27,13 +24,12 @@ window.addEventListener('load', function() {
             cellHeight: 40
         });
 
-        Util.loop(function() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            blueHouse.paint(ctx);
+        stage.tick(function() {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            blueHouse.paint(this.ctx);
         });
     }).catch(function(e) {
         console.error(e.message);
         console.error(e.stack);
     });
-
-}, false);
+});

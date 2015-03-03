@@ -43,18 +43,23 @@
       <option value="spread">发散</option>
       <option value="snow">雪花</option>
     </select>
-    <script type="text/javascript" src="../RequestAnimationFramePolyfill.js"></script>
-    <script type="text/javascript" src="../Util.js"></script>
-    <script type="text/javascript" src="../Color.js"></script>
-    <script type="text/javascript" src="../Item.js"></script>
-    <script type="text/javascript" src="../Painter.js"></script>
-    <script type="text/javascript" src="../Behavior.js"></script>
-    <script type="text/javascript" src="AudioAnalyser.js"></script>
-    <script type="text/javascript" src="SpreadPainter.js"></script>
-    <script type="text/javascript" src="LinePainter.js"></script>
-    <script type="text/javascript" src="BarPainter.js"></script>
-    <script type="text/javascript" src="SnowPainter.js"></script>
-    <script type="text/javascript" src="AudioBehavior.js"></script>
+    <script type="text/javascript" src="../lib/RequestAnimationFramePolyfill.js"></script>
+    <script type="text/javascript" src="../lib/promise.js"></script>
+    <script type="text/javascript" src="../lib/require.js"></script>
+
+    <script>
+        require.config({
+            baseUrl: "../",
+            paths: {
+                BarPainter: 'audioVisualiser/BarPainter',
+                LinePainter: 'audioVisualiser/LinePainter',
+                SnowPainter: 'audioVisualiser/SnowPainter',
+                SpreadPainter: 'audioVisualiser/SpreadPainter',
+                AudioBehavior: 'audioVisualiser/AudioBehavior',
+                AudioAnalyser: 'audioVisualiser/AudioAnalyser'
+            }
+        });
+    </script>
     <script type="text/javascript" src="AudioVisualiser.js"></script>
 </body>
 
