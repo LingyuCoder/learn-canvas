@@ -7,7 +7,9 @@ define(['Util', 'Item'], function(Util, Item) {
         animations: {},
         frames: [],
         loop: false,
-        pause: true
+        pause: true,
+        width: 0,
+        height: 0
     };
 
     var SpritePainter = {

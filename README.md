@@ -14,4 +14,6 @@
 
 - [x] [瓷砖地图](http://lingyucoder.github.io/learn-canvas/tilemap/tilemap.html)
 
+- [x] [重力模拟——五彩烟花](http://lingyucoder.github.io/learn-canvas/gravity/gravity.html)
+
 - [ ] 瓷砖地图编辑器

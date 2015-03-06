@@ -1,12 +1,13 @@
 define(['Util'], function(Util) {
     'use strict';
 
+    var isArray = Util.isType('array');
+    var isFunction = Util.isType('function');
+
     var defaultOptions = {
         visible: true,
         top: 0,
-        left: 0,
-        width: 0,
-        height: 0
+        left: 0
     };
 
     function Item(name, options, painter, behaviors) {
@@ -14,7 +15,12 @@ define(['Util'], function(Util) {
 
         this.name = name;
         this.painter = painter;
-        this.behaviors = behaviors || [];
+        if (isArray(behaviors))
+            this.behaviors = behaviors;
+        else if (behaviors && isFunction(behaviors.execute))
+            this.behaviors = [behaviors];
+        else
+            this.behaviors = [];
         this.scene = null;
         this.frameCount = 0;
 
@@ -39,4 +45,3 @@ define(['Util'], function(Util) {
 
     return Item;
 });
-

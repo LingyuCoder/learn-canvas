@@ -13,6 +13,9 @@ define(['Util'], function(Util) {
     }
 
     Util.extend(Vector2.prototype, {
+        copy: function() {
+            return new Vector2(this.x, this.y);
+        },
         add: function(vector) {
             this.x += vector.x;
             this.y += vector.y;

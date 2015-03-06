@@ -39,28 +39,36 @@ define(['Util', 'Scene'], function(Util, Scene) {
             this.rootScene.paint(this.ctx);
             return this;
         },
-        onkeydown: function(callback) {
+        keydown: function(callback) {
             this._on('keydown', callback);
             return this;
         },
-        onkeyup: function(callback) {
+        keyup: function(callback) {
             this._on('keyup', callback);
             return this;
         },
-        onkeypress: function(callback) {
+        keypress: function(callback) {
             this._on('keypress', callback);
             return this;
         },
-        offkeydown: function(callback) {
-            this._off('keydown');
+        click: function(callback) {
+            this.canvas.addEventListener('click', callback, false);
             return this;
         },
-        offkeyup: function(callback) {
-            this._off('keyup');
+        offClick: function(callback) {
+            this.canvas.removeEventListener('click', callback);
             return this;
         },
-        offkeypress: function(callback) {
-            this._off('keypress');
+        offKeydown: function(callback) {
+            this._off('keydown', callback);
+            return this;
+        },
+        offKeyup: function(callback) {
+            this._off('keyup', callback);
+            return this;
+        },
+        offKeypress: function(callback) {
+            this._off('keypress', callback);
             return this;
         },
         _on: function(eventType, callback) {
@@ -69,8 +77,8 @@ define(['Util', 'Scene'], function(Util, Scene) {
                 callback.call(that, event);
             }, false);
         },
-        _off: function(eventType) {
-            window.removeEventListener(eventType, this['_' + eventType]);
+        _off: function(eventType, callback) {
+            window.removeEventListener(eventType, callback);
         }
     });
 

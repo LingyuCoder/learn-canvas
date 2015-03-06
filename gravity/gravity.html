@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Sprites</title>
+    <title>Gravity</title>
     <style type="text/css">
-        html, body {
-          margin:0;
-          padding:0;
-          background-color:#000;
-          pointer-events: none;
-        }
-
-        canvas {
-          display: block;
-        }
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
     </style>
 </head>
+
 <body>
+    
     <canvas id="canvas"></canvas>
     <script type="text/javascript" src="../lib/RequestAnimationFramePolyfill.js"></script>
     <script type="text/javascript" src="../lib/promise.js"></script>
     <script type="text/javascript" src="../lib/require.js"></script>
 
-    <script type="text/javascript">
+    <script>
         require.config({
             baseUrl: '../',
             paths: {
-                PlayerBehavior: 'sprites/PlayerBehavior'
+                Ball: 'gravity/Ball',
+                BallBehavior: 'gravity/BallBehavior',
+                BallPainter: 'gravity/BallPainter'
             }
         });
     </script>
-    <script type="text/javascript" src="sprites.js"></script>
+    <script type="text/javascript" src="gravity.js"></script>
 </body>
+
 </html>

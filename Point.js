@@ -12,5 +12,11 @@ define(['Util'], function(Util) {
         this.y = y || 0;
     }
 
+    Util.extend(Point.prototype, {
+        copy: function() {
+            return new Point(this.x, this.y);
+        }
+    });
+
     return Point;
 });

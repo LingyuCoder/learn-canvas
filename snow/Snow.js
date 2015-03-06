@@ -85,13 +85,13 @@ define(['Vector2', 'Util'], function(Vector2, Util) {
             this.particles.length = 0;
 
             for (var i = 0; i < this.pAmount; i++) {
-                var origin = new Vector2(Util.Rand.frand(0, this.canvas.width), Util.Rand.frand(-this.canvas.height, 0));
-                var velocity = new Vector2(Util.Rand.frand(this.pSwing[0], this.pSwing[1]), Util.Rand.frand(this.pSpeed[0], this.pSpeed[1]));
-                var size = Util.Rand.frand(this.pSize[0], this.pSize[1]);
-                var amplitude = Util.Rand.frand(this.pAmplitude[0], this.pAmplitude[1]);
-                var rspeed = Util.Rand.frand(this.pRotation[0], this.pRotation[1]) * ((Math.random() < 0.5) ? -1 : 1);
-                var alpha = Util.Rand.frand(this.pAlpha[0], this.pAlpha[1]);
-                var image = (this.pImageObjects.length > 0) ? Util.Rand.irand(0, this.pImageObjects.length - 1) : -1;
+                var origin = new Vector2(Util.rand.float(0, this.canvas.width), Util.rand.float(-this.canvas.height, 0));
+                var velocity = new Vector2(Util.rand.float(this.pSwing[0], this.pSwing[1]), Util.rand.float(this.pSpeed[0], this.pSpeed[1]));
+                var size = Util.rand.float(this.pSize[0], this.pSize[1]);
+                var amplitude = Util.rand.float(this.pAmplitude[0], this.pAmplitude[1]);
+                var rspeed = Util.rand.float(this.pRotation[0], this.pRotation[1]) * ((Math.random() < 0.5) ? -1 : 1);
+                var alpha = Util.rand.float(this.pAlpha[0], this.pAlpha[1]);
+                var image = (this.pImageObjects.length > 0) ? Util.rand.integer(0, this.pImageObjects.length - 1) : -1;
 
                 this.particles.push(new Particle(origin, velocity, size, amplitude, rspeed, alpha, image));
             }

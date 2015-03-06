@@ -1,4 +1,5 @@
 var CanvasHelper = (function() {
+    'use strict';
 
     function windowToCanvas(ctx, x, y) {
         var canvas = ctx.canvas;

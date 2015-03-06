@@ -1,5 +1,6 @@
 define(function() {
     'use strict';
+
     var typeChecker = {};
 
     function hasOwn(obj, val) {
@@ -18,6 +19,10 @@ define(function() {
 
     function frand(min, max) {
         return (min || 0) + Math.random() * ((max || 1) - (min || 0));
+    }
+
+    function randColor() {
+        return '#' + irand(0, 255).toString(16) + irand(0, 255).toString(16) + irand(0, 255).toString(16);
     }
 
     function sequence(min, max) {
@@ -93,10 +98,11 @@ define(function() {
     return {
         hasOwn: hasOwn,
         isType: isType,
-        Rand: {
-            irand: irand,
-            frand: frand,
-            sequence: sequence
+        rand: {
+            integer: irand,
+            float: frand,
+            sequence: sequence,
+            color: randColor
         },
         extend: extend,
         each: each,

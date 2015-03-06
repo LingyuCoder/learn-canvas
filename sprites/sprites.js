@@ -119,9 +119,9 @@ require(['Stage', 'Loader', 'SpriteItem', 'PlayerBehavior'], function(Stage, Loa
         stage.canvas.width = window.innerWidth;
         stage.canvas.height = window.innerHeight;
 
-        stage.onkeydown(function(event) {
+        stage.keydown(function(event) {
             sprite.pressingKey = event.key || event.keyCode || event.which;
-        }).onkeyup(function(event) {
+        }).keyup(function(event) {
             sprite.pressingKey = null;
         }).tick(function() {
             this.ctx.clearRect(0, 0, canvas.width, canvas.height);

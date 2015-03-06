@@ -46,7 +46,7 @@ define(['Util', 'Item'], function(Util, Item) {
         remove: function(child) {
             var items = this.items;
             if (this.has(child)) {
-                items.splice(index, 1);
+                items.splice(this.index(child), 1);
                 child.scene = null;
             }
             return this;
