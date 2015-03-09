@@ -16,4 +16,6 @@
 
 - [x] [重力模拟——五彩烟花](http://lingyucoder.github.io/learn-canvas/gravity/gravity.html)
 
+- [ ] 碰撞检测
+
 - [ ] 瓷砖地图编辑器
