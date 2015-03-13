@@ -1,4 +1,4 @@
-require(['Util', 'Stage', 'Ball', 'Point', 'Vector2'], function(Util, Stage, Ball, Point, Vector2) {
+require(['Util', 'Stage', 'Ball', 'Vector2'], function(Util, Stage, Ball, Vector2) {
     var stage = new Stage('#canvas');
     var canvas = stage.canvas;
 
@@ -15,11 +15,15 @@ require(['Util', 'Stage', 'Ball', 'Point', 'Vector2'], function(Util, Stage, Bal
     function createBall() {
         var ball = new Ball((++id).toString(), {
             color: randColor(),
-            position: new Point(WIDTH / 2, HEIGHT),
+            center: {
+                x: WIDTH / 2,
+                y: HEIGHT
+            },
             accelerations: [new Vector2(0, 9.81)],
             radius: randFloat(10, 30),
             velocity: new Vector2(randFloat(-1, 1), randFloat(-2, -4.2))
         });
+
         balls.push(ball);
         stage.rootScene.add(ball);
     }
@@ -29,7 +33,7 @@ require(['Util', 'Stage', 'Ball', 'Point', 'Vector2'], function(Util, Stage, Bal
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
         stage.update().paint();
         for (var i = balls.length; i--;) {
-            if (balls[i].position.y > HEIGHT * 2 || balls[i].position.x > WIDTH * 2) {
+            if (balls[i].center.y > HEIGHT * 2 || balls[i].center.x > WIDTH * 2) {
                 stage.rootScene.remove(balls[i]);
             } else {
                 remain.push(balls[i]);

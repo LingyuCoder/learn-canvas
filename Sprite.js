@@ -34,13 +34,13 @@ define(['Util', 'Item'], function(Util, Item) {
         }
     };
 
-    function SpriteItem(name, options, behaviors) {
-        if (!this instanceof SpriteItem) return SpriteItem(name, options, behaviors);
+    function Sprite(name, options, behaviors) {
+        if (!this instanceof Sprite) return Sprite(name, options, behaviors);
         Item.call(this, name, options, SpritePainter, [SpriteBehavior].concat(behaviors || []));
         Util.extend(this, defaultOptions, options);
     }
 
-    Util.inherits(SpriteItem, Item);
+    Util.inherits(Sprite, Item);
 
-    return SpriteItem;
+    return Sprite;
 });

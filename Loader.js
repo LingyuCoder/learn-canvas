@@ -5,7 +5,7 @@ define(['Util'], function(Util) {
     var isString = Util.isType('string');
 
     function Loader() {
-        if (!this instanceof(Loader)) return new Loader();
+        if (!this instanceof Loader) return new Loader();
         this.cache = {};
     }
 

@@ -1,4 +1,4 @@
-require(['Stage', 'Loader', 'SpriteItem', 'PlayerBehavior'], function(Stage, Loader, SpriteItem, PlayerBehavior) {
+require(['Stage', 'Loader', 'Sprite', 'PlayerBehavior'], function(Stage, Loader, Sprite, PlayerBehavior) {
     'use strict';
 
     var loader = new Loader();
@@ -111,7 +111,7 @@ require(['Stage', 'Loader', 'SpriteItem', 'PlayerBehavior'], function(Stage, Loa
             currentFrameIndex: 0,
             currentAnime: 'down'
         };
-        var sprite = new SpriteItem(
+        var sprite = new Sprite(
             'sprite',
             options, [new PlayerBehavior()]);
 

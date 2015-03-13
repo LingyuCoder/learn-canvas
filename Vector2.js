@@ -1,24 +1,23 @@
 define(['Util'], function(Util) {
     'use strict';
 
-    function Vector2(x, y) {
-        if (!this instanceof Vector2) return new Vector2(x, y);
-        if (x instanceof Vector2) {
+    function Vector(x, y) {
+        if (!this instanceof Vector) return new Vector(x, y);
+        if (x instanceof Vector) {
             this.x = x.x;
             this.y = x.y;
             return;
         }
-        this.x = x || 0;
-        this.y = y || 0;
+        this.x = x;
+        this.y = y;
     }
 
-    Util.extend(Vector2.prototype, {
+    Util.extend(Vector.prototype, {
         copy: function() {
-            return new Vector2(this.x, this.y);
+            return new Vector(this.x, this.y);
         },
         add: function(vector) {
-            this.x += vector.x;
-            this.y += vector.y;
+            return new Vector(this.x + vector.x, this.y + vector.y);
         },
 
         magnitude: function() {
@@ -26,20 +25,15 @@ define(['Util'], function(Util) {
         },
 
         scale: function(scale) {
-            this.x *= scale;
-            this.y *= scale;
+            return new Vector(this.x * scale, this.y * scale);
         },
 
         sub: function(vector) {
-            this.x -= vector.x;
-            this.y -= vector.y;
-            return this;
+            return new Vector(this.x - vector.x, this.y - vector.y);
         },
 
         negate: function() {
-            this.x = -this.x;
-            this.y = -this.y;
-            return this;
+            return new Vector(-this.x, -this.y);
         },
 
         squaredMagnitude: function() {
@@ -75,5 +69,5 @@ define(['Util'], function(Util) {
         }
     });
 
-    return Vector2;
+    return Vector;
 });

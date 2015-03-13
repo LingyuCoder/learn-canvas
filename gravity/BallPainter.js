@@ -8,9 +8,9 @@ define(['Util'], function(Util) {
 
     Util.extend(BallPainter.prototype, {
         paint: function(item, ctx) {
-            var pos = item.position;
+            var center = item.center;
             ctx.beginPath();
-            ctx.arc(pos.x, pos.y, item.radius, 0, Math.PI * 2, true);
+            ctx.arc(center.x, center.y, item.radius, 0, Math.PI * 2, true);
             ctx.fillStyle = item.color;
             ctx.fill();
         }

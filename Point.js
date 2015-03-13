@@ -1,20 +1,19 @@
 define(['Util'], function(Util) {
     'use strict';
 
+    function square(x) {
+        return x * x;
+    }
+
     function Point(x, y) {
         if (!this instanceof Point) return new Point(x, y);
-        if (x instanceof Point) {
-            this.x = x.x;
-            this.y = x.y;
-            return;
-        }
-        this.x = x || 0;
-        this.y = y || 0;
+        this.x = x;
+        this.y = y;
     }
 
     Util.extend(Point.prototype, {
-        copy: function() {
-            return new Point(this.x, this.y);
+        distance: function(point) {
+            return Math.sqrt(square(this.y - point.y) - square(this.x - point.x));
         }
     });
 
