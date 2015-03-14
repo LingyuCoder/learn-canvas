@@ -16,6 +16,8 @@
 
 - [x] [重力模拟——五彩烟花](http://lingyucoder.github.io/learn-canvas/gravity/gravity.html)
 
-- [ ] 碰撞检测
+- [x] [圆圆碰撞检测](http://lingyucoder.github.io/learn-canvas/collision/collisionCircle.html)
+
+- [x] [凸多边形碰撞检测](http://lingyucoder.github.io/learn-canvas/collision/collisionCircle.html)
 
 - [ ] 瓷砖地图编辑器

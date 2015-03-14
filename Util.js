@@ -87,11 +87,11 @@ define(function() {
     }
 
     function currying() {
+        var slice = Array.prototype.slice;
         var f = arguments[0];
-        var args = Array.prototype.slice.call(arguments, 1);
+        var args = slice.call(arguments, 1);
         return function() {
-            args.push.apply(args, arguments);
-            return f.apply(this, args);
+            return f.apply(this, args.concat(slice.call(arguments)));
         }
     }
 

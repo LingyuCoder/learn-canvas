@@ -1,4 +1,4 @@
-define(['Util', 'Item', 'Point'], function(Util, Item, Point) {
+define(['Util', 'Item', 'Point', 'Collision', 'Vector2'], function(Util, Item, Point, Collision, Vector2) {
     'use strict';
 
     var defaultOptions = {
@@ -17,7 +17,7 @@ define(['Util', 'Item', 'Point'], function(Util, Item, Point) {
 
         Util.extend(this, defaultOptions, options);
 
-        this.center = new Point(this.center.x, this.center.y);
+        this.center = new Point(this.center);
     }
 
     Util.inherits(Circle, Item);
@@ -25,25 +25,21 @@ define(['Util', 'Item', 'Point'], function(Util, Item, Point) {
     Util.extend(Circle.prototype, {
         collidesWith: function(item) {
             if (item instanceof Circle)
-                return this._collidesWithCircle(item);
-            else if (item instanceof Shape)
-                return this._collidesWithShape(item);
+                return Collision.circleAndCircle(this, item);
             else if (item instanceof Point)
-                return this._coolidesWithPoint(item);
-            else if (item instanceof Segment)
-                return this._coolidesWithSegment(item);
+                return Collision.circleAndPoint(this, item);
         },
-        _collidesWithCircle: function(circle) {
-            
-        },
-        _collidesWithShape: function(shape) {
+        project: function(axis) {
+            var dot = new Vector2(this.center).dot(axis);
+            var scalars = [dot, dot + this.radius, dot - this.radius];
 
+            return {
+                min: Math.min.apply(Math, scalars),
+                max: Math.max.apply(Math, scalars)
+            };
         },
-        _coolidesWithPoint: function(point) {
-
-        },
-        _coolidesWithSegment: function(item) {
-
+        getAxes: function() {
+            return undefined;
         }
     });
 

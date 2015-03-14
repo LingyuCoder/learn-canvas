@@ -1,9 +1,11 @@
 define(['Util'], function(Util) {
     'use strict';
 
+    var isObject = Util.isType('object');
+
     function Vector(x, y) {
         if (!this instanceof Vector) return new Vector(x, y);
-        if (x instanceof Vector) {
+        if (isObject(x)) {
             this.x = x.x;
             this.y = x.y;
             return;
@@ -41,12 +43,17 @@ define(['Util'], function(Util) {
         },
 
         normalize: function() {
+            var x, y;
             var magnitude = this.magnitude();
             if (magnitude) {
-                this.x /= magnitude;
-                this.y /= magnitude;
+                x = this.x / magnitude;
+                y = this.y / magnitude;
             }
-            return this;
+            return new Vector(x, y);
+        },
+
+        normal: function() {
+            return this.perpendicular().normalize();
         },
 
         rotate: function(angle) {
@@ -54,14 +61,19 @@ define(['Util'], function(Util) {
             var y = this.y;
             var cos = Math.cos(angle);
             var sin = Math.sin(angle);
-
-            this.x = x * cos - y * sin;
-            this.y = x * sin + y * cos;
-            return this;
+            return new Vector(x * cos - y * sin, x * sin + y * cos);
         },
 
         dot: function(vector) {
             return this.x * vector.x + this.y * vector.y;
+        },
+
+        edge: function(vector) {
+            return this.sub(vector);
+        },
+
+        perpendicular: function() {
+            return new Vector(this.y, -this.x);
         },
 
         toString: function() {

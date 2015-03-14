@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CollisionShape</title>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        #panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 1px 1px #666;
+
+        }
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="panel">
+        <div class="row">
+            x: <input type="range" id="iptX" min="0" max="1000" value="500" step="10"/>
+        </div>
+        <div class="row">
+            y: <input type="range" id="iptY" min="0" max="1000" value="500" step="10"/>
+        </div>
+        <div class="row" id="result">
+            
+        </div>
+    </div>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script type="text/javascript" src="../lib/RequestAnimationFramePolyfill.js"></script>
+    <script type="text/javascript" src="../lib/Promise.js"></script>
+    <script type="text/javascript" src="../lib/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../',
+            paths: {
+                ShapePainter: 'collision/ShapePainter'
+            }
+        });
+    </script>
+    <script type="text/javascript" src="collisionShape.js"></script>
+</body>
+</html>

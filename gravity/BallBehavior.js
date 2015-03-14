@@ -1,12 +1,7 @@
 define(['Util', 'Vector2'], function(Util, Vector) {
     'use strict';
-    var isArray = Util.isType('array');
 
-    function BallBehavior() {
-        if (!this instanceof BallBehavior) return new BallBehavior();
-    }
-
-    Util.extend(BallBehavior.prototype, {
+    return {
         execute: function(item, ctx, frame) {
             var as = item.accelerations;
             var v;
@@ -26,7 +21,5 @@ define(['Util', 'Vector2'], function(Util, Vector) {
 
             item.lastUpdateTime = now;
         }
-    });
-
-    return new BallBehavior();
+    };
 });

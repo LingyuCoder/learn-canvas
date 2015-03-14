@@ -1,21 +1,26 @@
 define(['Util'], function(Util) {
     'use strict';
 
-    function square(x) {
-        return x * x;
-    }
+    var isObject = Util.isType('object');
 
     function Point(x, y) {
         if (!this instanceof Point) return new Point(x, y);
+        if (isObject(x)) {
+            this.x = x.x;
+            this.y = x.y;
+            return;
+        }
         this.x = x;
         this.y = y;
     }
 
-    Util.extend(Point.prototype, {
-        distance: function(point) {
-            return Math.sqrt(square(this.y - point.y) - square(this.x - point.x));
+    Util.extend(Point.prototype, function() {
+        return {
+            distance: function(point) {
+                return Math.sqrt(Math.pow(this.y - point.y, 2) + Math.pow(this.x - point.x, 2));
+            }
         }
-    });
+    }());
 
     return Point;
 });
