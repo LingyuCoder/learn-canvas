@@ -1,4 +1,4 @@
-define(['Util', 'Item', 'Point', 'Collision', 'Vector2'], function(Util, Item, Point, Collision, Vector2) {
+define(['require', 'Util', 'Item', 'Point', 'Vector2', 'Collision'], function(require, Util, Item, Point, Vector2, Collision) {
     'use strict';
 
     var defaultOptions = {
@@ -23,11 +23,18 @@ define(['Util', 'Item', 'Point', 'Collision', 'Vector2'], function(Util, Item, P
     Util.inherits(Circle, Item);
 
     Util.extend(Circle.prototype, {
+        contains: function(point) {
+            return Collision.circleAndPoint(this, point);
+        },
         collidesWith: function(item) {
             if (item instanceof Circle)
                 return Collision.circleAndCircle(this, item);
             else if (item instanceof Point)
                 return Collision.circleAndPoint(this, item);
+            else if (item instanceof require('Shape'))
+                return Collision.circleAndShape(this, item);
+            else if (item instanceof require('Segment'))
+                return Collision.circleAndSegment(this, item);
         },
         project: function(axis) {
             var dot = new Vector2(this.center).dot(axis);

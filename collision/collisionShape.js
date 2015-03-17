@@ -69,7 +69,7 @@ require(['Stage', 'Shape', 'ShapePainter'], function(Stage, Shape, ShapePainter)
         }
         stage.ctx.clearRect(0, 0, WIDTH, HEIGHT);
         stage.paint();
-        $result.textContent = s1.collidesWith(s2);
+        $result.textContent = !!s1.collidesWith(s2);
     }
 
     $x.addEventListener('change', redraw);

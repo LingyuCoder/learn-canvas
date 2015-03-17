@@ -18,6 +18,7 @@ define(['Util'], function(Util) {
         copy: function() {
             return new Vector(this.x, this.y);
         },
+        
         add: function(vector) {
             return new Vector(this.x + vector.x, this.y + vector.y);
         },
@@ -36,6 +37,14 @@ define(['Util'], function(Util) {
 
         negate: function() {
             return new Vector(-this.x, -this.y);
+        },
+
+        angle: function(v) {
+            return this.dot(v) / (this.magnitude() * v.magnitude());
+        },
+
+        project: function(v) {
+            return this.dot(v) / v.magnitude();
         },
 
         squaredMagnitude: function() {

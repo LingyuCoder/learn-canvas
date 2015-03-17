@@ -1,4 +1,4 @@
-define(['Util'], function(Util) {
+define(['Util', 'Collision'], function(Util, Collision) {
     'use strict';
 
     var isObject = Util.isType('object');
@@ -18,6 +18,12 @@ define(['Util'], function(Util) {
         return {
             distance: function(point) {
                 return Math.sqrt(Math.pow(this.y - point.y, 2) + Math.pow(this.x - point.x, 2));
+            },
+            inCircle: function(circle) {
+                return Collision.circleAndPoint(circle, this);
+            },
+            inShape: function(shape) {
+                return Collision.shapeAndPoint(shape, this);
             }
         }
     }());

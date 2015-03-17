@@ -35,7 +35,7 @@ require(['Stage', 'Circle', 'CirclePainter'], function(Stage, Circle, CirclePain
         c2.center.y = Number($y.value);
         stage.ctx.clearRect(0, 0, WIDTH, HEIGHT);
         stage.paint();
-        $result.textContent = c1.collidesWith(c2);
+        $result.textContent = !!c1.collidesWith(c2);
     }
 
     $x.addEventListener('change', redraw);

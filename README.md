@@ -20,6 +20,6 @@
 
 - [x] [凸多边形碰撞检测](http://lingyucoder.github.io/learn-canvas/collision/collisionCircle.html)
 
-- [ ] 圆与凸多边形碰撞检测
+- [x] [凸多边形和圆、圆与线段、线段与线段碰撞检测](http://lingyucoder.github.io/learn-canvas/collision/collisionShapeAndCircle.html)
 
 - [ ] 瓷砖地图编辑器

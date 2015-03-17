@@ -1,10 +1,9 @@
-define(['Util', 'Item', 'Point', 'Collision', 'Vector2'], function(Util, Item, Point, Collision, Vector2) {
+define(['require', 'Util', 'Item', 'Point', 'Vector2', 'Collision'], function(require, Util, Item, Point, Vector2, Collision) {
     'use strict';
 
     var defaultOptions = {
         points: []
     };
-
 
     function Shape(name, options, painter, behaviors) {
         if (!this instanceof Shape) return new Shape(name, options, painter, behaviors);
@@ -22,6 +21,15 @@ define(['Util', 'Item', 'Point', 'Collision', 'Vector2'], function(Util, Item, P
     Util.inherits(Shape, Item);
 
     Util.extend(Shape.prototype, {
+        contains: function(point) {
+            return Collision.shapeAndPoint(this, point);
+        },
+        collidesWith: function(item) {
+            if (item instanceof Shape)
+                return Collision.shapeAndShape(this, item);
+            else if (item instanceof require('Circle'))
+                return Collision.circleAndShape(item, this);
+        },
         getAxes: function() {
             var axes = [];
             var points = this.points;
@@ -39,10 +47,6 @@ define(['Util', 'Item', 'Point', 'Collision', 'Vector2'], function(Util, Item, P
                 min: Math.min.apply(Math, scalars),
                 max: Math.max.apply(Math, scalars)
             };
-        },
-        collidesWith: function(item) {
-            if (item instanceof Shape)
-                return Collision.shapeAndShape(this, item);
         }
     });
 
