@@ -29,7 +29,13 @@ define(['Util', 'Scene'], function(Util, Scene) {
                 !callback.call(that, count++, (now = Date.now()) - start, now - last, last = now) && next();
             };
             var next = interval == null ? requestNextAnimationFrame.bind(null, loop) : setTimeout.bind(null, loop, interval);
-            return loop();
+            loop();
+            return this;
+        },
+        clean: function(){
+            var canvas = this.canvas;
+            this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+            return this;
         },
         update: function() {
             this.rootScene.update(this.ctx);

@@ -94,8 +94,6 @@ require(
             }]
         }, SegmentPainter);
 
-        console.log(s1.collidesWith(s2));
-
         stage.rootScene.add(shape).add(circle).add(s1).add(s2);
 
         function redraw() {
@@ -103,8 +101,8 @@ require(
             circle.center.y = Number($y.value);
             stage.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             stage.paint();
-            console.log(circle.collidesWith(s1));
-            $result.textContent = '圆与多边形：' + !!shape.collidesWith(circle) + '\n' + '圆与线段：' + !!circle.collidesWith(s1);
+            console.log(shape.collidesWith(circle));
+            $result.textContent = '圆与多边形：' + !!(shape.collidesWith(circle).overlap) + '\n' + '圆与线段：' + !!circle.collidesWith(s1);
 
         }
 

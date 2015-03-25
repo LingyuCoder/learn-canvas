@@ -48,7 +48,7 @@ define(function() {
     function each(obj, callback) {
         var i, m;
         if (isType('array')(obj))
-            for (i = 0, m = obj.length; i < l; i++)
+            for (i = 0, m = obj.length; i < m; i++)
                 callback.call(obj, obj[i], i);
         else
             for (i in obj)

@@ -16,6 +16,9 @@ define(['Util', 'Collision'], function(Util, Collision) {
 
     Util.extend(Point.prototype, function() {
         return {
+            copy: function() {
+                return new Point(this);
+            },
             distance: function(point) {
                 return Math.sqrt(Math.pow(this.y - point.y, 2) + Math.pow(this.x - point.x, 2));
             },
@@ -24,6 +27,9 @@ define(['Util', 'Collision'], function(Util, Collision) {
             },
             inShape: function(shape) {
                 return Collision.shapeAndPoint(shape, this);
+            },
+            equal: function(point) {
+                return this.x === point.x && this.y === point.y;
             }
         }
     }());

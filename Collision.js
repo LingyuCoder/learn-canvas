@@ -21,18 +21,21 @@ define(['require', 'Point', 'Vector2', 'Util'], function(require, Point, Vector2
     }
 
     function minimumTranslationVector(axes, shape1, shape2) {
-        var minOverlap = Math.MAX_VALUE;
+        var minOverlap = Number.MAX_VALUE;
         var minAxis = null;
         for (var i = axes.length, overlap; i--;) {
             if ((overlap = getOverlap(shape1.project(axes[i]), shape2.project(axes[i]))) === 0)
-                return false;
+                return {
+                    axis: null,
+                    overlap: 0
+                };
             else if (overlap < minOverlap) {
                 minAxis = axes[i];
                 minOverlap = overlap;
             }
         }
         return {
-            axis: minAxis,
+            axis: minAxis.normalize(),
             overlap: minOverlap
         };
     }
@@ -57,7 +60,19 @@ define(['require', 'Point', 'Vector2', 'Util'], function(require, Point, Vector2
 
     return {
         circleAndCircle: function(circle1, circle2) {
-            return circle1.center.distance(circle2.center) < circle1.radius + circle2.radius;
+            var c1 = circle1.center;
+            var c2 = circle2.center;
+            var dis = c1.distance(c2);
+            var overlap;
+            if ((overlap = dis - circle1.radius - circle2.radius) < 0)
+                return {
+                    axis: new Vector2(c1.x - c2.x, c1.y - c2.y).normalize(),
+                    overlap: -overlap
+                };
+            else return {
+                axis: null,
+                overlap: 0
+            };
         },
         circleAndPoint: function(circle, point) {
             return circle.center.distance(point) < circle.radius;
@@ -75,14 +90,17 @@ define(['require', 'Point', 'Vector2', 'Util'], function(require, Point, Vector2
             if (u <= 0) closest = p1;
             else if (u >= v2.magnitude()) closest = p2;
             else closest = new Point(p1.x + v3.x, p1.y + v3.y);
-
             var overlap = circle.radius - closest.distance(center);
             if (overlap <= 0)
-                return false;
-            else return {
-                axis: v1.sub(v3),
-                overlap: overlap
-            };
+                return {
+                    axis: null,
+                    overlap: 0
+                };
+            else
+                return {
+                    axis: v1.sub(v3),
+                    overlap: overlap
+                };
         },
         circleAndShape: function(circle, shape) {
             var axes = shape.getAxes();

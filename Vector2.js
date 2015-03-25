@@ -18,7 +18,7 @@ define(['Util'], function(Util) {
         copy: function() {
             return new Vector(this.x, this.y);
         },
-        
+
         add: function(vector) {
             return new Vector(this.x + vector.x, this.y + vector.y);
         },
@@ -79,6 +79,11 @@ define(['Util'], function(Util) {
 
         edge: function(vector) {
             return this.sub(vector);
+        },
+
+        reflect: function(normal) {
+            var n = normal.normalize();
+            return this.sub(n.scale(2 * this.dot(n)));
         },
 
         perpendicular: function() {

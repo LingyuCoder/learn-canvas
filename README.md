@@ -22,4 +22,6 @@
 
 - [x] [凸多边形和圆、圆与线段、线段与线段碰撞检测](http://lingyucoder.github.io/learn-canvas/collision/collisionShapeAndCircle.html)
 
+- [x] [弹跳的小球](http://lingyucoder.github.io/learn-canvas/collision/collisionShapeAndCircle.html)：基于圆与多边形、圆与圆的碰撞检测、重力模拟做的一个弹跳小球的demo，点击屏幕弹出一个小球
+
 - [ ] 瓷砖地图编辑器

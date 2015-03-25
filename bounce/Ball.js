@@ -10,9 +10,10 @@ define(['Util', 'Circle', 'BallPainter', 'BallBehavior'], function(Util, Circle,
         if (!this instanceof Ball) return new Ball(options);
         Util.extend(this, defaultOptions, options);
         Circle.call(this, name, options, Painter, Behavior);
-        
         this.velocity = options.velocity || new Vector2(0, 0);
         this.lastUpdateTime = Date.now();
+        this.lastPos = this.center.copy();
+        this.staticFrame = 0;
     }
 
     Util.inherits(Ball, Circle);
