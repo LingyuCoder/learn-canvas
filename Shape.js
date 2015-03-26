@@ -16,6 +16,8 @@ define(['require', 'Util', 'Item', 'Point', 'Vector2', 'Collision'], function(re
         this.points = [];
         for (var i = 0, m = points.length; i < m; i++)
             this.points.push(new Point(points[i]));
+
+        this.origin = this.getGravity();
     }
 
     Util.inherits(Shape, Item);
@@ -47,6 +49,20 @@ define(['require', 'Util', 'Item', 'Point', 'Vector2', 'Collision'], function(re
                 min: Math.min.apply(Math, scalars),
                 max: Math.max.apply(Math, scalars)
             };
+        },
+        getGravity: function() {
+            var area = 0;
+            var p = this.points;
+            var center = new Point(0, 0);
+            for (var i = 0, m = p.length, nxt; i < m; i++) {
+                nxt = (i + 1) % m;
+                area += (p[i].x * p[nxt].y - p[nxt].x * p[i].y) / 2;
+                center.x += (p[i].x * p[nxt].y - p[nxt].x * p[i].y) * (p[i].x + p[nxt].x);
+                center.y += (p[i].x * p[nxt].y - p[nxt].x * p[i].y) * (p[i].y + p[nxt].y);
+            }
+            center.x /= 6 * area;
+            center.y /= 6 * area;
+            return center;
         }
     });
 

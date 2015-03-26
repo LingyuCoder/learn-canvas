@@ -18,6 +18,7 @@ define(['require', 'Util', 'Item', 'Point', 'Vector2', 'Collision'], function(re
         Util.extend(this, defaultOptions, options);
 
         this.center = new Point(this.center);
+        this.origin = this.center;
     }
 
     Util.inherits(Circle, Item);

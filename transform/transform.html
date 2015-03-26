@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transform</title>
+    <style type="text/css">
+        html, body {
+          margin:0;
+          padding:0;
+        }
+
+        canvas {
+          display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript" src="../lib/RequestAnimationFramePolyfill.js"></script>
+    <script type="text/javascript" src="../lib/promise.js"></script>
+    <script type="text/javascript" src="../lib/require.js"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: '../',
+        paths: {
+          ShapePainter: 'transform/ShapePainter',
+          CirclePainter: 'transform/CirclePainter',
+        }
+      });
+    </script>
+    <script type="text/javascript" src="transform.js"></script>
+</body>
+</html>

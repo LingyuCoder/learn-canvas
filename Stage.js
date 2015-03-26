@@ -16,6 +16,7 @@ define(['Util', 'Scene'], function(Util, Scene) {
             width: canvas.width,
             height: canvas.height,
         });
+        this.pause = false;
     }
 
     Util.extend(Stage.prototype, {
@@ -26,13 +27,23 @@ define(['Util', 'Scene'], function(Util, Scene) {
             var last = now;
             var count = 0;
             var loop = function() {
-                !callback.call(that, count++, (now = Date.now()) - start, now - last, last = now) && next();
+                if (!that.pause)
+                    callback.call(that, count++, (now = Date.now()) - start, now - last, last = now)
+                next();
             };
             var next = interval == null ? requestNextAnimationFrame.bind(null, loop) : setTimeout.bind(null, loop, interval);
             loop();
             return this;
         },
-        clean: function(){
+        pause: function() {
+            this.pause = true;
+            return this;
+        },
+        resume: function() {
+            this.pause = false;
+            return this;
+        },
+        clean: function() {
             var canvas = this.canvas;
             this.ctx.clearRect(0, 0, canvas.width, canvas.height);
             return this;
